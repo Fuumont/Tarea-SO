@@ -4,9 +4,9 @@
 using namespace cv;
 using namespace std;
 
-int main() {
+int main(int argc, char** argv) {
     // Lee la imagen a color
-    Mat image = imread("peak.jpeg");
+    Mat image = imread(argv[1]);
 
     // Muestra la imagen original
     imshow("Imagen original", image);
@@ -36,7 +36,7 @@ int main() {
     // Muestra la imagen en escala de grises
     imshow("Imagen en escala de grises", image);
     // Guarda la imagen en escala de grises
-    imwrite("imagengris.jpg", image);
+    imwrite(argv[2], image);
     
     waitKey(0);
 
