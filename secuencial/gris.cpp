@@ -1,8 +1,10 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include <chrono>
 
 using namespace cv;
 using namespace std;
+using namespace chrono; 
 
 int main(int argc, char** argv) {
     // Lee la imagen a color
@@ -14,6 +16,8 @@ int main(int argc, char** argv) {
     // Obtiene las dimensiones de la imagen
     int rows = image.rows;
     int cols = image.cols;
+        // Iniciamos el cronómetro
+    auto start_time = high_resolution_clock::now();
 
     // Itera sobre cada píxel de la imagen y aplica el método de luminosidad
     for (int i = 0; i < rows; i++) {
@@ -33,6 +37,12 @@ int main(int argc, char** argv) {
             image.at<Vec3b>(i, j) = pixel;
         }
     }
+    // Paramos el cronómetro
+    auto end_time = high_resolution_clock::now();
+    // Calculamos el tiempo transcurrido
+    auto duration = duration_cast<milliseconds>(end_time - start_time);
+    // Mostramos el tiempo transcurrido
+    cout << "Tiempo de ejecución: " << duration.count() << " milisegundos" << endl;
     // Muestra la imagen en escala de grises
     imshow("Imagen en escala de grises", image);
     // Guarda la imagen en escala de grises
